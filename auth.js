@@ -45,11 +45,11 @@ function getJSON(url) {
 }
 
 exports.getUserId = function* getUserId (accessToken) {
-  var url = config.pebbleAuthUrl + '/oauth/token/info.json?access_token=' +
+  var url = config.pebbleAuthUrl + '/api/v1/me?access_token=' +
     encodeURIComponent(accessToken);
 
   var result = yield getJSON(url);
-  var userId = result.resource_owner_id && result.resource_owner_id.$oid;
+  var userId = result.uid;
 
   if (userId) {
     return userId;

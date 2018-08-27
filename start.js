@@ -8,4 +8,4 @@ require('sanity').check(
 
 var server = require('./server');
 
-server.listen(config.PORT);
+server.listen(config.port);

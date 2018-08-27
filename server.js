@@ -29,6 +29,7 @@
 
 var ws = require('ws');
 var koa = require('koa');
+var route = require('koa-route')
 var Connection = require('./connection').Connection;
 var http = require('http');
 
@@ -38,6 +39,8 @@ var server = module.exports = http.createServer(app.callback());
 
 var wsDevice = new ws.Server({server: server, path: '/device'});
 var wsTool = new ws.Server({server: server, path: '/tool'});
+
+app.use(route.get('/healthz', function*() {this.body='ok'}))
 
 wsDevice.on('connection', function (ws) {
   setupConnection(ws, true);
